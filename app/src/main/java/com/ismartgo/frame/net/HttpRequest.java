@@ -9,4 +9,6 @@ public interface HttpRequest {
      * @param params
      */
     void get(String url, Map<String,String> params);
+    void get();
+
 }
