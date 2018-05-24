@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/btn1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintWidth_min="200dp"
+        android:text="minWidth设置为最小200dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <Button
+        android:id="@+id/btn2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="设置为Match_constraint"
+        app:layout_constraintTop_toBottomOf="@id/btn1"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <Button
+        android:id="@+id/btn3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="layout_constrainedWidth开启"
+        app:layout_constraintTop_toBottomOf="@id/btn2"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintWidth_min="300dp"/>
+
+    <Button
+        android:id="@+id/btn4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="layout_constrainedWidth关闭"
+        app:layout_constraintTop_toBottomOf="@id/btn3"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintWidth_min="300dp"
+        app:layout_constrainedWidth="false"/>
+
+    <!--
+      设置宽度使用百分比
+      app:layout_constraintWidth_default="percent"
+      设置高度使用百分比
+      app:layout_constraintHeight_default="percent"
+
+      强制约束
+      当一个控件设为wrap_content时，再添加约束尺寸是不起效果的。如需生效，需要设置如下属性为true:
+      app:layout_constrainedWidth=”true|false”
+      app:layout_constrainedHeight=”true|false”
+
+      设置可以设置宽度
+      app:layout_constrainedWidth="true"
+      设置可以设置高度
+      app:layout_constrainedHeight="true"
+      设置宽度百分比为50%
+      app:layout_constraintWidth_percent="0.5"
+      设置高度百分比为30%
+      app:layout_constraintHeight_percent="0.3"
+    -->
+
+
+    <Button
+        android:id="@+id/btn5"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/btn4"
+        android:text="宽50%高30%布局"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintWidth_percent="0.5"
+        app:layout_constraintHeight_percent="0.3"/>
+
+
+</android.support.constraint.ConstraintLayout>

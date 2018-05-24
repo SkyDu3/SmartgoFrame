@@ -1,0 +1,84 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    defaultConfig {
+        applicationId rootProject.ext.android["applicationId"]
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            //设置支持的so库架构
+            abiFilters 'armeabi', 'x86', 'armeabi-v7a', 'x86_64'
+        }
+    }
+
+    //keystore文件设置
+    signingConfigs {
+        release {
+            storeFile file("/Users/skydu/Documents/工作/精明购/文档/sign/smartgo.jks")
+            storePassword "jingminggou"
+            keyAlias "zhixuan"
+            keyPassword "ismartgo66"
+        }
+        debug {
+
+        }
+    }
+
+    buildTypes {
+        debug {
+            //显示log输入日志
+            debuggable true
+            //不进行混淆
+            minifyEnabled false
+            //配置BASE_URL
+            buildConfigField "String","BASE_URL","\"http://www.baidu.com\""
+        }
+        release {
+            debuggable false  //不显示log输出日志
+            minifyEnabled true  //是否混淆
+            zipAlignEnabled true  //是否使用zipalign工具压缩。
+            shrinkResources true  //是否去除未利用的资源，默认false，表示不去除。
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //混淆规则文件
+            signingConfig signingConfigs.release
+
+            //配置BASE_URL
+            buildConfigField "String","BASE_URL","\"http://www.qq.com\""
+        }
+    }
+
+    //设置打包文件名字
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                //将名字设置为 版本号.apk
+                outputFileName = outputFile.name.replace(".apk", "-${defaultConfig.versionName}.apk")
+            }
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    //    implementation "com.squareup.retrofit2:retrofit:${rootProject.ext.depsVersion["retrofit2"]}"
+    //    implementation "com.squareup.retrofit2:retrofit-converters:${rootProject.ext.depsVersion["retrofit2"]}"
+    //    implementation "com.squareup.retrofit2:converter-gson:${rootProject.ext.depsVersion["retrofit2"]}"
+    //    implementation "com.squareup.retrofit2:adapter-rxjava:${rootProject.ext.depsVersion["retrofit2"]}"
+    //    implementation "io.reactivex.rxjava2:rxandroid:${rootProject.ext.depsVersion["rxandroid"]}"
+    //    implementation "io.reactivex.rxjava2:rxjava:${rootProject.ext.depsVersion["rxjava"]}"
+    //    implementation 'com.trello.rxlifecycle2:rxlifecycle:2.2.1'
+    //    implementation 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+}
